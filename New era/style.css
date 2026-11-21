@@ -1,0 +1,201 @@
+/* VARIÁVEIS DE CORES: guarda as cores da empresa em um só lugar para facilitar alterações */
+:root {
+    --bg-dark: #061324;       /* Azul-marinho bem escuro para o fundo */
+    --bg-card: #0c203b;       /* Azul escuro para os cartões/caixas */
+    --blue-deep: #0284c7;     /* Azul médio/forte para degradês */
+    --cyan-glow: #38bdf8;     /* Azul-ciano brilhante para destaque */
+    --text-main: #f1f5f9;     /* Branco suave para textos principais */
+    --text-muted: #94a3b8;    /* Cinza-azulado para textos secundários */
+    --border: rgba(56, 189, 248, 0.25); /* Borda fina azul-ciano translúcida */
+  }
+  
+  /* RESET GERAL: padroniza margens e fontes em todos os elementos */
+  * {
+    box-sizing: border-box; /* Faz bordas e preenchimentos entrarem no cálculo da largura */
+    margin: 0;              /* Remove margens padrão do navegador */
+    padding: 0;             /* Remove espaçamentos internos padrão do navegador */
+    font-family: "Segoe UI", Roboto, Arial, sans-serif; /* Define a fonte moderna */
+  }
+  
+  /* CORPO DA PÁGINA: fundo com degradê azul e centralização vertical */
+  body {
+    background: radial-gradient(circle at top right, #0d2a4e 0%, var(--bg-dark) 65%); /* Efeito de luz azul no topo */
+    color: var(--text-main); /* Cor padrão do texto */
+    min-height: 100vh;       /* Ocupa pelo menos 100% da altura da tela */
+    display: flex;           /* Ativa layout flexível */
+    flex-direction: column;  /* Organiza itens de cima para baixo */
+  }
+  
+  /* CABEÇALHO SUPERIOR */
+  header {
+    background: rgba(6, 19, 36, 0.88); /* Fundo escuro semi-transparente */
+    border-bottom: 1px solid var(--border); /* Linha divisória azul clara embaixo */
+    padding: 16px 32px;      /* Espaçamento interno */
+    display: flex;           /* Alinha logo e nome lado a lado */
+    align-items: center;     /* Centraliza verticalmente */
+    gap: 12px;               /* Espaço entre o logo e o texto */
+  }
+  
+  /* LOGO "NE" */
+  .brand-logo {
+    width: 40px;             /* Largura */
+    height: 40px;            /* Altura */
+    border-radius: 10px;     /* Cantos arredondados */
+    background: linear-gradient(135deg, var(--cyan-glow), var(--blue-deep)); /* Degradê azul */
+    display: grid;           /* Centraliza a letra "NE" */
+    place-items: center;     /* Centraliza horizontal e verticalmente */
+    font-weight: 800;        /* Texto bem negrito */
+    color: #04101f;          /* Cor escura para dar contraste no botão brilhante */
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.4); /* Brilho azul ao redor do logo */
+  }
+  
+  /* TÍTULO E SUBTÍTULO DA EMPRESA */
+  .brand-title {
+    font-weight: 700;        /* Negrito */
+    font-size: 1.15rem;      /* Tamanho da fonte */
+  }
+  
+  .brand-sub {
+    font-size: 0.78rem;      /* Fonte menor */
+    color: var(--cyan-glow); /* Cor ciano de destaque */
+  }
+  
+  /* CONTAINER CENTRAL */
+  .container {
+    max-width: 680px;        /* Largura máxima para não ficar largo demais em telas grandes */
+    width: 100%;             /* Ocupa a largura disponível até o limite máximo */
+    margin: auto;            /* Centraliza na tela */
+    padding: 32px 20px;      /* Espaçamento nas laterais e topo/base */
+  }
+  
+  /* SEÇÃO DE TÍTULO PRINCIPAL (HERO) */
+  .hero {
+    text-align: center;      /* Centraliza o texto */
+    margin-bottom: 24px;     /* Espaço abaixo antes do cartão */
+  }
+  
+  .hero h1 {
+    font-size: 1.85rem;      /* Tamanho grande do título principal */
+    margin-bottom: 8px;      /* Espaço abaixo do título */
+  }
+  
+  .hero h1 span {
+    color: var(--cyan-glow); /* Destaca a palavra "futuro" em ciano */
+  }
+  
+  .hero p {
+    color: var(--text-muted); /* Texto secundário mais suave */
+    font-size: 0.95rem;
+  }
+  
+  /* CARTÃO PRINCIPAL DO SIMULADOR */
+  .card {
+    background: var(--bg-card); /* Fundo azul escuro */
+    border: 1px solid var(--border); /* Borda azul sutil */
+    border-radius: 16px;      /* Cantos bem arredondados */
+    padding: 28px;            /* Espaçamento interno */
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidade */
+  }
+  
+  .card h2 {
+    font-size: 1.25rem;
+    color: var(--cyan-glow);
+    margin-bottom: 6px;
+  }
+  
+  .card .desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  
+  /* CAMPOS DO FORMULÁRIO */
+  .form-group {
+    margin-bottom: 16px;      /* Espaço entre cada campo */
+  }
+  
+  label {
+    display: block;           /* Faz o rótulo ficar acima do campo */
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    margin-bottom: 6px;
+  }
+  
+  input, select {
+    width: 100%;              /* Ocupa toda a largura do cartão */
+    padding: 11px 12px;       /* Conforto interno ao digitar/escolher */
+    border-radius: 8px;       /* Cantos arredondados */
+    border: 1px solid rgba(148, 163, 184, 0.3); /* Borda cinza-azulada */
+    background: #07162b;      /* Fundo escuro dentro do campo */
+    color: var(--text-main);  /* Texto claro */
+    font-size: 0.95rem;
+  }
+  
+  /* EFEITO QUANDO CLICA DENTRO DO CAMPO */
+  input:focus, select:focus {
+    outline: none;            /* Remove a borda padrão do navegador */
+    border-color: var(--cyan-glow); /* Destaca a borda em ciano */
+  }
+  
+  /* LINHA DO CHECKBOX DO GRAFENO */
+  .checkbox-row {
+    display: flex;            /* Coloca caixinha e texto lado a lado */
+    align-items: center;      /* Alinha no centro vertical */
+    gap: 8px;                 /* Espaço entre a caixinha e o texto */
+    margin-bottom: 18px;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+  }
+  
+  .checkbox-row input {
+    width: auto;              /* Impede a caixinha de esticar para 100% da largura */
+  }
+  
+  .checkbox-label {
+    margin: 0;                /* Remove margem inferior do label dentro do checkbox */
+  }
+  
+  /* BOTÃO PRINCIPAL */
+  button {
+    width: 100%;
+    cursor: pointer;          /* Mostra a mãozinha ao passar o mouse */
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 1rem;
+    background: linear-gradient(135deg, var(--cyan-glow), var(--blue-deep)); /* Degradê azul */
+    color: #04101f;
+    transition: 0.2s ease;    /* Animação suave ao passar o mouse */
+  }
+  
+  /* EFEITO AO PASSAR O MOUSE NO BOTÃO */
+  button:hover {
+    filter: brightness(1.1);  /* Deixa o botão levemente mais brilhante */
+    transform: translateY(-1px); /* Sobe 1 pixel suavemente */
+  }
+  
+  /* CAIXA DE RESULTADOS */
+  .resultado-box {
+    margin-top: 20px;
+    background: rgba(6, 19, 36, 0.85); /* Fundo mais escuro para destacar os números */
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  
+  .resultado-item {
+    display: flex;            /* Texto à esquerda e valor à direita */
+    justify-content: space-between; /* Separa os dois lados */
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12); /* Linha sutil entre linhas */
+    font-size: 0.95rem;
+  }
+  
+  .resultado-item:last-child {
+    border-bottom: none;      /* Remove a linha de baixo no último item */
+  }
+  
+  .destaque-ciano {
+    color: var(--cyan-glow);  /* Cor ciano no texto de tecnologia estrutural */
+  }

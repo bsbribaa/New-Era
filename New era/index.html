@@ -1,0 +1,133 @@
+<!DOCTYPE html> <!-- Indica que o documento é um site HTML5 moderno -->
+<html lang="pt-BR"> <!-- Define o idioma da página como português do Brasil -->
+<head>
+  <meta charset="UTF-8" /> <!-- Permite usar acentos e "ç" sem bugar -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Faz a página se adaptar a celulares e telas menores -->
+  <title>New Era Engenharia — Simulador de Obra</title> <!-- Título que aparece na aba do navegador -->
+
+  <!-- Liga este arquivo HTML ao arquivo externo de estilos CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- CABEÇALHO: faixa superior com a identidade da empresa -->
+  <header>
+    <div class="brand-logo">NE</div> <!-- Quadradinho azul com as iniciais da New Era Engenharia[cite: 2] -->
+    <div>
+      <div class="brand-title">New Era Engenharia</div> <!-- Nome da empresa[cite: 2] -->
+      <div class="brand-sub">Arquitetura • Grafeno • Sustentabilidade</div> <!-- Destaques do projeto[cite: 2] -->
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL DA PÁGINA -->
+  <main class="container">
+
+    <!-- BLOCO DE DESTAQUE INICIAL (inspirado na abertura da apresentação) -->
+    <div class="hero">
+      <!-- "span" destaca a palavra "futuro" em azul-ciano no CSS -->
+      <h1>Construindo o <span>futuro</span> que o mundo ainda não viu.</h1> <!-- Slogan principal da apresentação[cite: 2] -->
+      <p>Obras de médio e grande porte com planejamento inteligente e tecnologia de ponta.</p> <!-- Resumo da atuação[cite: 2] -->
+    </div>
+
+    <!-- ÚNICA FUNCIONALIDADE: Simulador de Obra & Grafeno -->
+    <section class="card">
+      <h2>Simulador de Obra &amp; Grafeno</h2> <!-- Título da funcionalidade -->
+      <p class="desc">Calcule a estimativa de investimento, prazo e durabilidade do seu projeto.</p> <!-- Explicação curta -->
+
+      <!-- FORMULÁRIO: onde o usuário escolhe os dados e clica para calcular -->
+      <!-- "onsubmit" chama a função calcularObra() quando o botão é clicado -->
+      <form onsubmit="calcularObra(event)">
+
+        <!-- Campo 1: escolha do tipo de obra -->
+        <div class="form-group">
+          <label for="tipoObra">Tipo de empreendimento</label> <!-- Rótulo do campo -->
+          <select id="tipoObra"> <!-- Lista de opções de obras do portfólio[cite: 2] -->
+            <option value="residencial">Edifício Residencial Moderno</option> <!-- Opção residencial[cite: 2] -->
+            <option value="mcmv">Habitação Popular (Minha Casa, Minha Vida)</option> <!-- Opção MCMV[cite: 2] -->
+            <option value="comercial">Shopping Center / Comercial</option> <!-- Opção comercial[cite: 2] -->
+            <option value="estatal">Obra Civil / Estatal</option> <!-- Opção estatal[cite: 2] -->
+          </select>
+        </div>
+
+        <!-- Campo 2: área em metros quadrados -->
+        <div class="form-group">
+          <label for="area">Área construída estimada (m²)</label>
+          <!-- "type='number'" aceita apenas números; "value='2500'" já começa com um exemplo pronto -->
+          <input type="number" id="area" min="50" max="200000" value="2500" required />
+        </div>
+
+        <!-- Campo 3: caixinha de seleção (checkbox) para ativar ou não o grafeno -->
+        <div class="checkbox-row">
+          <!-- "checked" deixa a caixinha marcada por padrão -->
+          <input type="checkbox" id="usarGrafeno" checked />
+          <label for="usarGrafeno" class="checkbox-label">
+            Aplicar concreto reforçado com grafeno (+durabilidade, -manutenção) <!-- Benefício do grafeno[cite: 2] -->
+          </label>
+        </div>
+
+        <!-- Botão que envia o formulário para calcular -->
+        <button type="submit">Calcular Estimativa</button>
+      </form>
+
+      <!-- CAIXA DE RESULTADOS: mostra o cálculo na tela -->
+      <div class="resultado-box">
+        <div class="resultado-item">
+          <span>Investimento estimado:</span>
+          <!-- O JavaScript troca esse valor quando você clica em calcular -->
+          <strong id="resCusto">R$ 8.292.500</strong>
+        </div>
+        <div class="resultado-item">
+          <span>Prazo estimado (modelagem 3D):</span>
+          <!-- O JavaScript atualiza o prazo em meses -->
+          <strong id="resPrazo">14 meses</strong>
+        </div>
+        <div class="resultado-item">
+          <span>Tecnologia estrutural:</span>
+          <!-- O JavaScript mostra se o grafeno está ativo ou não -->
+          <strong id="resGrafeno" class="destaque-ciano">Grafeno ativo (+vida útil)</strong>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- LÓGICA DA FUNCIONALIDADE (JavaScript): faz os cálculos quando o botão é clicado -->
+  <script>
+    function calcularObra(event) {
+      event.preventDefault(); // Impede a página de recarregar sozinha ao enviar o formulário
+
+      // Pega os valores escolhidos pelo usuário na tela
+      const tipo = document.getElementById("tipoObra").value; // Tipo de obra selecionado
+      const area = Number(document.getElementById("area").value); // Área convertida para número
+      const usarGrafeno = document.getElementById("usarGrafeno").checked; // Verdadeiro ou falso se marcou o grafeno
+
+      // Tabela de valores base por m² e meses iniciais para cada tipo de obra
+      const tabelaBase = {
+        residencial: { custoM2: 3100, mesesBase: 10 }, // Residencial
+        mcmv:        { custoM2: 2150, mesesBase: 8 },  // Minha Casa, Minha Vida
+        comercial:   { custoM2: 3600, mesesBase: 12 }, // Shopping / Comercial
+        estatal:     { custoM2: 3900, mesesBase: 14 }  // Obra estatal
+      };
+
+      const base = tabelaBase[tipo]; // Seleciona os dados do tipo de obra escolhido
+      const fatorGrafeno = usarGrafeno ? 1.07 : 1.0; // Aplica +7% se usar grafeno, ou mantém 100% se não usar
+      const custoTotal = area * base.custoM2 * fatorGrafeno; // Calcula o custo total estimado
+      const meses = Math.max(4, Math.round(base.mesesBase + area / 600)); // Calcula o prazo estimado (mínimo 4 meses)
+
+      // Formata o custo em Reais (R$) e escreve na tela
+      document.getElementById("resCusto").textContent = custoTotal.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        maximumFractionDigits: 0
+      });
+
+      // Escreve o prazo estimado na tela
+      document.getElementById("resPrazo").textContent = `${meses} meses`;
+
+      // Escreve o status do grafeno na tela
+      document.getElementById("resGrafeno").textContent = usarGrafeno
+        ? "Grafeno ativo (+vida útil)"
+        : "Concreto convencional";
+    }
+  </script>
+</body>
+</html>
